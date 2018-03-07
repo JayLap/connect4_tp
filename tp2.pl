@@ -19,14 +19,32 @@ etat_initial(board(
 /* Conditions de victoire ------------------------------------------------*/
 
 
-#Colonne de 4
-etat_final(board(
-	[	[J, J, J, J, _, _]|restB]), J):- not(J=empty)
-	;etat_final(restB, J).
 
+etat_final(board([[J, J, J, J, _, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[J, J, J, J, _, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[J, J, J, J, _, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[J, J, J, J, _, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[_],[J, J, J, J, _, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[_],[_],[J, J, J, J, _, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[_],[_],[_],[J, J, J, J, _, _]|...]), J):- not(J=empty).
+
+etat_final(board([[_, J, J, J, J, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[_, J, J, J, J, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_, J, J, J, J, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[_, J, J, J, J, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[_],[_, J, J, J, J, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[_],[_],[_, J, J, J, J, _]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[_],[_],[_],[_, J, J, J, J, _]|...]), J):- not(J=empty).
 	
+etat_final(board([[_, _, J, J, J, J]|...]), J):- not(J=empty).
+etat_final(board([[_],[_, _, J, J, J, J]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_, _, J, J, J, J]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[_, _, J, J, J, J]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[_],[_, _, J, J, J, J]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[_],[_],[_, _, J, J, J, J]|...]), J):- not(J=empty).
+etat_final(board([[_],[_],[_],[_],[_],[_],[_, _, J, J, J, J]|...]), J):- not(J=empty).
 	
-#Partie nulle 
+		
 etat_final(board(
 	[	[A, A, A, A, A, A],
 		[A, A, A, A, A, A],

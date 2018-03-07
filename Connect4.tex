@@ -38,7 +38,19 @@
 
 \section*{Introduction}
 \section*{Présentation du jeu choisi}
+
 \section*{Modélisation du problème}
+\subsection*{État initial}
+L'état initial du jeux puissance 4 sera représenté en utilisant des listes. Il y aura donc 7 listes qui permettront de représenter les différentes colonnes du jeu. Ces listes contiendront chacune 6 éléments pour représenter les emplacements ou peuvent être situé des jetons. De cette façon, nous obtenons un état initial qui a 7 colonnes et 6 lignes. Lorsque l’on initialise le jeu, une valeur indiquant que la case est vide est inséré dans chacun des 42 emplacements disponibles sur le jeu. L’état initiale contient aussi une valeur indiquant qu’elle joueur commence la partie. 
+ 
+\subsection*{États finaux}
+
+
+\subsection*{Mouvements autorisés}
+Le seul mouvement du jeux est l'insertion d'un jeton dans l'une des colonnes du jeux. Il existe seulement deux restrictions pour l'insertion d'un jeton. Tout d'abord, il faut que le joueur qui procède à l'insertion soit le joueur courant. La deuxième restriction est que la colonne dans laquelle le joueur veut insérer son jeton ne doit pas être pleine. C'est-à-dire qu'il ne faut pas qu'il y est déja 6 jetons dans la colonne. 
+
+Plus spécifiquements, la première condition sera toujours géré par la boucle du jeux  et fera en sorte que le joueur qui choisi sera toujours celui qui doit réellement jouer. Pour la deuxième condition, à chaque fois qu'un joueur choisira une colonne, il faudra vérifier si il reste une valeur indiquant une case vide dans la liste représentant cette colonne. Si cette valeur existe, le joeur pourra procéder à l'insertion, sinon, le joueur devra choisir une nouvelle colonne. 
+
 \section*{Résultats et discussion}
 \section*{Conclusion}
 

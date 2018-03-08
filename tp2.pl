@@ -1,10 +1,10 @@
 
-/* Board setting
-	- : il n'y a aucun jeton sur la case
-	x : jeton du player
-	o : jeton du IA
-	item 0 : haut de la colone
-	item 6 : bas de la colone
+/* BOARD SETTINGS
+	- : empty space
+	x : user coin
+	o : IA coin
+	item 0 : top of column
+	item 6 : bottom of column
 */
 etat_initial(board([[-, -, -, -, -, -],
 										[-, -, -, -, -, -],
@@ -14,8 +14,7 @@ etat_initial(board([[-, -, -, -, -, -],
 										[-, -, -, -, -, -],
 										[-, -, -, -, -, -]])).
 
-/* Victory conditions */
-
+/* VICTORY CONDITIONS */
 etat_final(board([[J, J, J, J, _, _]|...]), J):- not(J = -).
 etat_final(board([[_],[J, J, J, J, _, _]|...]), J):- not(J = -).
 etat_final(board([[_],[_],[J, J, J, J, _, _]|...]), J):- not(J = -).
@@ -49,36 +48,36 @@ etat_final(board([[A, A, A, A, A, A],
 									[A, A, A, A, A, A]],
 									n) :- not(A = -)).
 
-/* Print board functions */
-show_board(board(X)):- show(X,6), print_colomns_number.
+/* PRINT BOARD FUNCTIONS */
+show_board(board(X)):- show(X,0), print_columns_number.
+/* Start at row 0 to 5 */
+show(_,6).
+show(A,N):- print_column(A,B), nl, M is N + 1, show(B, M).
+/* Print the first element of every column */
+print_column([],_).
+print_column([[A|B]|C],[B|D]):- write(A), write('  '), print_column(C,D).
+/* Show number of the columns */
+print_columns_number :- write('1  2  3  4  5  6  7').
 
-show(_,0).
-show(X,N):- print_colomn(X,X2), nl, Ns is N-1, show(X2,Ns).
+/* OPERATIONS */
+/*  Validate player entry */
+column(1).
+column(2).
+column(3).
+column(4).
+column(5).
+column(6).
+column(7).
+column(_) :- write('Invalid column number.'), nl, enter_column_number.
+enter_column_number :- write('Enter a column number : '), nl, read(X), column(X).
 
-print_colomn([],_).
-print_colomn([[X|X2]|XS],[X2|XS2]):- write(X), write('  '), print_colomn(XS,XS2).
-
-print_colomns_number :- write('1  2  3  4  5  6  7').
-
-/*  Validate user entry */
-colomn(1).
-colomn(2).
-colomn(3).
-colomn(4).
-colomn(5).
-colomn(6).
-colomn(7).
-colomn_available(X) :- colomn(X).
-
-/* Turn to play */
-turn_to_play(x) :- write('Your turn.\n').
-turn_to_play(o) :- write('IA\'s turn.\n').
-
-/* Who wins? */
-print_winner(1) :- write('IA wins!\n').
-print_winner(0) :- write('You win!\n').
-print_winner(2) :- write('Tie\n').
-winner(X, Y) :- etat_final(X), print_winner(Y).
-
+/* PLAY GAME */
+/* Text to display at the beginning of the game */
+intro_text :- nl, write('CONNECT FOUR'), nl,
+				write('Player (x) starts first.'), nl, nl.
 /* Play the game :) */
-play :- etat_initial(X), show_board(X).
+play :- intro_text,
+        etat_initial(X),
+		  	show_board(X), nl, nl,
+				enter_column_number,
+				show_board(X).

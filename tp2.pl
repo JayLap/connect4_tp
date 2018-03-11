@@ -327,7 +327,6 @@ print_row([[A|B]|C],[B|D]):- write(A), write('  '), print_row(C,D).
 print_columns_number :- write('1  2  3  4  5  6  7').
 
 /* OPERATIONS */
-
 /*  Validate player entry */
 column(1).
 column(2).
@@ -358,10 +357,27 @@ find_column(X, [A|B], [A1|B], N, M) :- N == M,
 /* Move a coin in the specified column */
 move_coin(X, board(Y), board(Y2), N) :- find_column(X, Y, Y2, N, 1).
 
-/* IA move */
-machine(X, X2) :- move_coin('o', X, X2, 7).
+/* Player move */
+player(X, X2) :- enter_column_number(N),
+						     move_coin('x', X, X2, N),
+						     show_board(X2), nl, nl,
+								 next_player('o', X2, _).
 
-/* PLAY GAME */
+/* IA move */
+machine(X, X2) :- write('IA move a coin in colunm 7.'), nl, nl,
+						      move_coin('o', X, X2, 7),
+                  show_board(X2), nl, nl,
+									next_player('x', X2, _).
+
+/* Decide a winner */
+win('x') :- nl, write('Player as not win yet.').
+win('o') :- write('IA as not win yet.').
+
+/* Decide who's turn to play */
+/*next_player('o', _, _) :- win('x').*/
+/*next_player('x', _, _) :- win('o').*/
+next_player('o', X, X2) :- machine(X, X2).
+next_player('x', X, X2) :- player(X, X2).
 
 /* Text to display at the beginning of the game */
 intro_text :- nl, write('CONNECT FOUR'), nl,
@@ -371,6 +387,4 @@ intro_text :- nl, write('CONNECT FOUR'), nl,
 play :- intro_text,
         etat_initial(X),
 		  	show_board(X), nl, nl,
-				enter_column_number(N),
-				move_coin('x', X, X2, N),
-				show_board(X2).
+				player(X, _).

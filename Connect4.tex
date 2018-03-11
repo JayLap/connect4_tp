@@ -56,11 +56,24 @@ Les états finaux du jeu représentent toutes les combinaisons possibles pour qu
 \subsection*{Mouvements autorisés}
 Le seul mouvement du jeux est l'insertion d'un jeton dans l'une des colonnes du jeux. Il existe seulement deux restrictions pour l'insertion d'un jeton. Tout d'abord, il faut que le joueur qui procède à l'insertion soit le joueur courant. La deuxième restriction est que la colonne dans laquelle le joueur veut insérer son jeton ne doit pas être pleine. C'est-à-dire qu'il ne faut pas qu'il y est déja 6 jetons dans la colonne. \\
 
-Plus spécifiquements, la première condition sera toujours géré par la boucle du jeux  et fera en sorte que le joueur qui choisi sera toujours celui qui doit réellement jouer. Pour la deuxième condition, à chaque fois qu'un joueur choisira une colonne, il faudra vérifier si il reste une valeur indiquant une case vide dans la liste représentant cette colonne. Si cette valeur existe, le joeur pourra procéder à l'insertion, sinon, le joueur devra choisir une nouvelle colonne. 
+Plus spécifiquements, la première condition sera toujours géré par la boucle du jeux  et fera en sorte que le joueur qui choisi sera toujours celui qui doit réellement jouer. Pour la deuxième condition, à chaque fois qu'un joueur choisira une colonne, il faudra vérifier si il reste une valeur indiquant une case vide dans la liste représentant cette colonne. Si cette valeur existe, le joeur pourra procéder à l'insertion, sinon, le joueur devra choisir une nouvelle colonne.
+
+\subsection*{Fonction heuristique}
+
+
+\subsection*{Technique de recherche}
+
 
 \section*{Résultats et discussion}
 
+
 \section*{Conclusion}
-%résumé du travail accompli et ce que vous auriez pu ou aimé faire de plus
+Ce travail a permis d’explorer en profondeur un problème requérant l’utilisation de l’intelligence artificielle. Le problème consistant à un jeu comme Puissance 4 est certes simple, mais permet de faire une bonne introduction aux différentes techniques utilisées dans ce domaine et au langage de programmation Prolog.\\
+
+En effet, programmer le jeu pour ce travail a demandé d’effectuer des recherches sur différents aspects du langage pour réaliser la programmation des différents composants. Les différents exemples du cours ont cependant permis d’avoir une base sur laquelle se fonder pour le reste du travail. La programmation fut la partie la plus difficile du travail à réaliser et le programme résultant n’est surement pas la manière la plus optimale de procéder. Il serait certainement intéressant de regarder ce code et peut-être même de regarder ce qui peut être amélioré lorsque notre connaissance de Prolog sera plus développée. \\
+
+L’utilisation de la technique minimax pour la décision des mouvements de joueur ordinateur nous a permis d’explorer cette dernière à l’aide d’un exemple concret. Il y a certainement plusieurs autres manières de résoudre le problème, mais cette technique est simple, semble bien marché et elle s’applique très bien au jeu choisi dans ce travail. Il pourrait être intéressant de tester avec d’autre technique et d’autre fonction heuristique pour comparer les résultats.\\
+
+Ce fut donc un travail en apparence simple, mais qui a demandé de développer en profondeur notre compréhension des différents éléments vus dans le cours. 
 
 \end{document}

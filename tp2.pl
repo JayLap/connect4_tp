@@ -374,12 +374,14 @@ machine(X, X2) :- write('IA move a coin in colunm 7.'), nl, nl,
 									next_player('x', X2, _).
 
 /* Decide a winner */
-win('x') :- nl, write('Player as not win yet.').
-win('o') :- write('IA as not win yet.').
+win('x', X) :- etat_final(X),
+							 write('PLAYER WINS! :)'), nl, nl.
+win('o', X) :- etat_final(X),
+							 write('IA WINS! :)'), nl, nl.
 
 /* Decide who's turn to play */
-/*next_player('o', _, _) :- win('x').*/
-/*next_player('x', _, _) :- win('o').*/
+next_player('o', X, _) :- win('x', X), play_again.
+next_player('x', X, _) :- win('o', X), play_again.
 next_player('o', X, X2) :- machine(X, X2).
 next_player('x', X, X2) :- player(X, X2).
 

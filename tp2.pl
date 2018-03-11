@@ -81,7 +81,7 @@ etat_final(board([	[J, _, _, _, _, _],
 					[_, _, _, _, _, _],
 					[_, _, _, _, _, _]]),
 					J):- not(J = -).
-					
+
 etat_final(board([	[_, _, _, _, _, _],
 					[J, _, _, _, _, _],
 					[_, J, _, _, _, _],
@@ -288,7 +288,7 @@ etat_final(board([	[_, _, _, _, _, _],
 					[_, J, _, _, _, _],
 					[J, _, _, _, _, _]]),
 					J):- not(J = -).
-							
+
 /* partie nulle*/
 etat_final(board([	[A, A, A, A, A, A],
 					[A, A, A, A, A, A],
@@ -319,8 +319,12 @@ column(4).
 column(5).
 column(6).
 column(7).
-column(_) :- write('Invalid column number.'), nl, enter_column_number.
-enter_column_number :- write('Enter a column number : '), nl, read(X), column(X).
+column(_) :- write('Invalid column number.'), nl, nl, enter_column_number(_).
+enter_column_number(X) :- write('Enter a column number : '), nl,
+											 read(N), nl, column(N), X is N.
+move(X, N, 'x') :- write('Player move coin to '),
+									 write(N), write(' column.'), nl,
+									 show_board(X).
 
 /* PLAY GAME */
 /* Text to display at the beginning of the game */
@@ -330,5 +334,4 @@ intro_text :- nl, write('CONNECT FOUR'), nl,
 play :- intro_text,
         etat_initial(X),
 		  	show_board(X), nl, nl,
-				enter_column_number,
-				show_board(X).
+				enter_column_number(N), write(N).

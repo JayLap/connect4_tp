@@ -28,8 +28,8 @@ etat_initial(board([[-, -, -, -, -, -],
 										[-, -, -, -, -, -],
 										[-, -, -, -, -, -]])).
 
-/* CONDITIONS de VICTOIRE
- colonne de quatre */
+/* CONDITIONS de VICTOIRE */
+/* colonne de quatre */
 etat_final(board([[J, J, J, J, _, _]|...]), J):- not(J = -).
 etat_final(board([[_],[J, J, J, J, _, _]|...]), J):- not(J = -).
 etat_final(board([[_],[_],[J, J, J, J, _, _]|...]), J):- not(J = -).
@@ -54,7 +54,7 @@ etat_final(board([[_],[_],[_],[_],[_, _, J, J, J, J]|...]), J):- not(J = -).
 etat_final(board([[_],[_],[_],[_],[_],[_, _, J, J, J, J]|...]), J):- not(J = -).
 etat_final(board([[_],[_],[_],[_],[_],[_],[_, _, J, J, J, J]|...]), J):- not(J = -).
 
-/*rangée de quatre*/
+/* rangée de quatre */
 etat_final(board([[J |...], [J |...], [J| ...], [J|...] |...]), J):- not(J = -).
 etat_final(board([[_], [J |...], [J |...], [J| ...], [J|...], [_]]), J):- not(J = -).
 etat_final(board([[_], [_], [J |...], [J |...], [J| ...], [J|...]]), J):- not(J = -).
@@ -85,7 +85,7 @@ etat_final(board([[_], [_,_,_,_,_,J |...], [_,_,_,_,_,J |...], [_,_,_,_,_,J | ..
 etat_final(board([[_], [_], [_,_,_,_,_,J |...], [_,_,_,_,_,J |...], [_,_,_,_,_,J | ...], [_,_,_,_,_,J |...], [_]]), J):- not(J = -).
 etat_final(board([[_], [_], [_], [_,_,_,_,_,J], [_,_,_,_,_,J], [_,_,_,_,_,J], [_,_,_,_,_,J]]), J):- not(J = -).
 
-/*diagonal*/
+/* diagonal */
 etat_final(board([[J, _, _, _, _, _],
 									[_, J, _, _, _, _],
 									[_, _, J, _, _, _],
@@ -344,6 +344,10 @@ add_coin_in_column(X, ['-'], [X]).
 add_coin_in_column(X, ['-', A|B], [X, A|B]) :- A \== '-'.
 add_coin_in_column(X, ['-', A|B], ['-', A1|B1]) :- (A == '-'),
 																									 add_coin_in_column(X, [A|B], [A1|B1]).
+add_coin_in_column(_, [A|_], _) :- A \== '-',
+																	write('Wrong move : the column is full!'), nl,
+																	write('Game stopped.'), nl, nl,
+																	play_again.
 
 /* Find the desired column and move a coin in the column */
 find_column(X, [A|B], [A|B2], N, M) :- N \== M,
@@ -388,3 +392,11 @@ play :- intro_text,
         etat_initial(X),
 		  	show_board(X), nl, nl,
 				player(X, _).
+
+/* Play again */
+response('yes') :- play.
+response(_) :- write('Wrong answer :)'), nl, nl,
+							 play_again.
+play_again :- write('Do you want to play again?'), nl,
+							write('yes/no'), nl,
+							read(X), response(X).

@@ -8,8 +8,8 @@ copy(A, A).
 
 /* finds the column number associated with the specific list */
 find_column_number([], _, 8, _).
-find_column_number([H|T], C, N, M):- H = C, M is N.
-find_column_number([H|T], C, N, M):- N1 is N+1, find_column_number(T, C, N1, M).
+find_column_number([H|_], C, N, M):- H = C, M is N.
+find_column_number([_|T], C, N, M):- N1 is N+1, find_column_number(T, C, N1, M).
 
 /* finds the first free column of the board */
 find_a_free_column([], 8, _).

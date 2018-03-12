@@ -181,11 +181,13 @@ play_again :- write('Do you want to play again?'), nl,
 machine(board(X), X2):- (append(_,[C|_], X),
                          append(_,['-','x','x','x'|_],C))
                        ->(find_column_number(X, C, 1, M),
+                         not(contient_pas('-', C)),
                           machine_play(X, X2, M)).
 
 machine(board(X), X2):- (append(_,[C|_], X),
                          append(_,['-','o','o','o'|_],C))
                        ->(find_column_number(X, C, 1, M),
+                         not(contient_pas('-', C)),
                           machine_play(X, X2, M)).
 /* rangee, ou diagonale de deux ou plus */
 machine(board(X), X2):-
@@ -194,6 +196,7 @@ machine(board(X), X2):-
     append(P2, ['o'|_], Col2),
     append(P3, ['o'|_], Col3),    (row3(P1,P2,P3); rightD3(P1,P2,P3); leftD3(P1,P2,P3)))
     -> (find_column_number(X, Col3, 1, M),
+       not(contient_pas('-', Col3)),
        machine_play(X, X2, M)).
 
 machine(board(X), X2):-
@@ -201,7 +204,8 @@ machine(board(X), X2):-
     append(P1, ['o'|_], Col1),
     append(P2, ['o'|_], Col2),
     append(P3, ['-'|_], Col3),    (row3(P1,P2,P3); rightD3(P1,P2,P3); leftD3(P1,P2,P3)))
-    -> (find_column_number(X, Col3, 1, M),
+    -> (find_column_number(X, Col1, 1, M),
+       not(contient_pas('-', Col1)),
        machine_play(X, X2, M)).
 
 machine(board(X), X2):-
@@ -210,6 +214,7 @@ machine(board(X), X2):-
     append(P2, ['x'|_], Col2),
     append(P3, ['-'|_], Col3),    (row3(P1,P2,P3); rightD3(P1,P2,P3); leftD3(P1,P2,P3)))
     -> (find_column_number(X, Col3, 1, M),
+       not(contient_pas('-', Col3)),
        machine_play(X, X2, M)).
 
 machine(board(X), X2):-
@@ -217,22 +222,26 @@ machine(board(X), X2):-
     append(P1, ['-'|_], Col1),
     append(P2, ['x'|_], Col2),
     append(P3, ['x'|_], Col3),    (row3(P1,P2,P3); rightD3(P1,P2,P3); leftD3(P1,P2,P3)))
-    -> (find_column_number(X, Col3, 1, M),
+    -> (find_column_number(X, Col1, 1, M),
+       not(contient_pas('-', Col1)),
        machine_play(X, X2, M)).
 
 /* colonne de deux */
 machine(board(X), X2):- (append(_,[C|_], X),
                          append(_,['-','-','x','x'|_],C))
                        ->(find_column_number(X, C, 1, M),
+                         not(contient_pas('-', C)),
                            machine_play(X, X2, M)).
 machine(board(X), X2):- (append(_,[C|_], X),
                          append(_,['-','-','o','o'|_],C))
                        ->(find_column_number(X, C, 1, M),
+                         not(contient_pas('-', C)),
                            machine_play(X, X2, M)).
 /* colonne de un 'o' */
 machine(board(X), X2):- (append(_,[C|_], X),
                          append(_,['-','-','-','o'|_],C))
                        ->(find_column_number(X, C, 1, M),
+                         not(contient_pas('-', C)),
                            machine_play(X, X2, M)).
 
 /*  dans le cas exception ou aucune des conditions s'appliquent */
